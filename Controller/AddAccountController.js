@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 const userModel = require('../Model/UsersModel');
 
+const getBankAccounts = async (req, res) => {
+ const { id } = req.params;
+ const loadBankAccounts = await userModel.findOne({ id }, {
+  // $elemMatch: { addBankAccount } 
+ });
+ res.status(200).json(loadBankAccounts);
+}
+
 const addBankAccounts = async (req, res) => {
  const { id } = req.params;
 
@@ -25,5 +33,6 @@ const addBankAccounts = async (req, res) => {
  }
 }
 module.exports = {
- addBankAccounts
+ addBankAccounts,
+ getBankAccounts
 }

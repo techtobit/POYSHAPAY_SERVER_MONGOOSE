@@ -29,7 +29,7 @@ const Users = new Schema({
  ],
  addBankAccount: [
  ],
- bankAccount: [
+ favoritesAccount: [
 
  ],
  transactions: [

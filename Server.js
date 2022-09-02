@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 var cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 4000;
-const MONGODB_URI = process.env.MONGODB_URI;
 
 //routers
 const Users = require('./Routes/UsersRoutes');
@@ -31,6 +30,7 @@ app.use('/singUp', Users)
 app.use('/sendMoney', SendMoneyRouter)
 app.use('/addMoney', AddMoneyRouter)
 app.use('/addBankAccounts', AddAccountRoutes)
+
 
 
 //connect mongodb with mongoose

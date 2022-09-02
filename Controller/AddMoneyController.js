@@ -9,13 +9,14 @@ const pushAddMoneyData = async (req, res) => {
     res.status(400).json({ error: 'User data not found' })
   }
   const { bankName, bankAccountNumber, addAmount, Reference } = req.body;
+  const requestAddAmount = parseInt(addAmount)
 
   try {
     const mainBalance = await usersModel.findOne({ id })
     const accountBalance = parseInt(mainBalance.balance);
 
-    if (addAmount >= 10) {
-      const newBalance = parseInt(accountBalance + addAmount);
+    if (requestAddAmount) {
+      const newBalance = parseInt(accountBalance + requestAddAmount);
       createdAt = new Date()
 
       const addMoneyBank = await usersModel.updateMany({ id },
@@ -33,8 +34,10 @@ const pushAddMoneyData = async (req, res) => {
       )
       console.log(addMoneyBank)
       res.status(200).json(addMoneyBank)
+
     } else {
-      console.log('Sorry,You have deposit min 10 USD');
+      res.status(400).json({ error: "Sorry,You have deposit min 10 USD " })
+      res.status(400).json({ error: "Request Unsuccessful" })
     }
 
   } catch (error) {
